@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Criar Minha Loja{% endblock %}
+
+{% block content %}
+<div class="container form-page">
+  <h1>Criar Minha Loja</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="field">
+      {{ form.nome.label_tag }}<br>
+      {{ form.nome }}
+      {{ form.nome.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.telefone.label_tag }}<br>
+      {{ form.telefone }}
+      {{ form.telefone.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.endereco.label_tag }}<br>
+      {{ form.endereco }}
+      {{ form.endereco.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.categoria.label_tag }}<br>
+      {{ form.categoria }}
+      {{ form.categoria.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.descricao.label_tag }}<br>
+      {{ form.descricao }}
+      {{ form.descricao.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.profile_image.label_tag }}<br>
+      {{ form.profile_image }}
+      {{ form.profile_image.errors }}
+    </div>
+
+    <div class="field">
+      {{ form.cover_image.label_tag }}<br>
+      {{ form.cover_image }}
+      {{ form.cover_image.errors }}
+    </div>
+
+    <button type="submit" class="btn-md">Criar Loja</button>
+  </form>
+
+  <p class="small mt-3">
+    <a href="{% url 'home' %}">&larr; Voltar à Home</a>
+  </p>
+</div>
+{% endblock %}

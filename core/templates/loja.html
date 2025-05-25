@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ loja.nome }} – Minha Loja{% endblock %}
+
+{% block content %}
+<div class="store-page">
+
+  {# -- CABEÇALHO DA LOJA -- #}
+  <header class="store-header">
+    <div class="store-avatar-wrap">
+
+      {% if loja.profile_image %}
+        <img 
+           src="{{ loja.profile_image.url }}"
+           alt="Avatar {{ loja.nome }}"
+           class="store-avatar store-avatar--small"/>
+      {% else %}
+      <div class="store-avatar placeholder"></div>
+      {% endif %}
+    </div>
+
+
+    <div class="store-meta">
+      <h1 class="store-name">{{ loja.nome }}</h1>
+      <p class="store-desc">{{ loja.descricao }}</p>
+      <div class="mt-4">
+      <p><strong>📞 Contato:</strong> {{ loja.telefone }}</p>
+      <p><strong>📍 Endereço:</strong> {{ loja.endereco }}</p>
+      <p><strong>🗓️ Horário de Funcionamento:</strong> {{ loja.horario_funcionamento }}</p>
+
+      {% if request.user == loja.usuario %}
+        <a href="{% url 'editar_loja' loja.id %}" class="btn btn-sm btn-edit">
+          Editar
+        </a>
+      {% endif %}
+    </div>
+
+  </header>
+
+  {# -- CAPA (BANNER) -- #}
+  {% if loja.cover_image %}
+  <div class="store-cover" 
+       style="background-image:url('{{ loja.cover_image.url }}')">
+  </div>
+  {% endif %}
+
+  {# -- SEÇÃO DE PRODUTOS -- #}
+  <section class="store-products">
+    {% if request.user == loja.usuario %}
+      <h2 class="section-title">Meus Produtos</h2>
+    {% else %}
+      <h2 class="section-title">Produtos</h2>
+    {% endif %}
+    
+    {% if request.user == loja.usuario %}
+     <a href="{% url 'criar_produto' loja.id %}" class="btn btn-lg btn-add">
+       Adicionar Produto
+     </a>
+    {% endif %}
+
+    <div class="product-grid">
+      {% for produto in loja.produtos.all %}
+      <div class="product-card">
+
+        {# só mostra o botão se quem está logado for o dono da loja #}
+        {% if produto.imagem %}
+        <img src="{{ produto.imagem.url }}" 
+             alt="{{ produto.nome }}" 
+             class="product-img">
+        {% else %}
+        <div class="product-img placeholder"></div>
+        {% endif %}
+        <div class="product-info">
+          <h3 class="product-name">{{ produto.nome }}</h3>
+          <p class="product-price">R$ {{ produto.preco }}</p>
+         
+        {% if user.is_authenticated and user == loja.usuario %}
+          <a href="{% url 'editar_produto' loja.id produto.id %}" class="btn btn-sm btn-edit-sm">
+            Editar
+          </a>
+        {% endif %}
+          
+        </div>
+      </div>
+      {% empty %}
+      <p class="no-products">Você ainda não cadastrou produtos.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+</div>
+{% endblock %}

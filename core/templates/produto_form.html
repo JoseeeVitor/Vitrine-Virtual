@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Adicionar Produto{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="product-form-card">
+    <!-- HEADER do CARD -->
+    <header class="product-form-header">
+      <div class="header-icon">＋</div>
+      <h1 class="header-title">
+        {% if produto %}Editar Produto{% else %}Adicionar Produto{% endif %}
+      </h1>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <nav class="breadcrumbs">
+      <a href="{% url 'home' %}">Início</a>
+      <span>›</span>
+      <a href="{% url 'loja' loja.id %}">{{ loja.nome }}</a>
+      <span>›</span>
+      <span>{% if produto %}Editar{% else %}Adicionar{% endif %} Produto</span>
+    </nav>
+
+    <!-- FORMULÁRIO -->
+    <form method="post" enctype="multipart/form-data" class="product-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.nome.label_tag }}
+        {{ form.nome }}
+        {{ form.nome.errors }}
+      </div>
+
+      <div class="form-group">
+        {{ form.descricao.label_tag }}
+        {{ form.descricao }}
+        {{ form.descricao.errors }}
+      </div>
+
+      <div class="form-group">
+        {{ form.preco.label_tag }}
+        {{ form.preco }}
+        {{ form.preco.errors }}
+      </div>
+
+      <div class="form-group">
+        {{ form.imagem.label_tag }}
+        {{ form.imagem }}
+        {{ form.imagem.errors }}
+      </div>
+
+      <div class="form-actions">
+        <button type="reset" class="btn-secondary">Limpar</button>
+        <button type="submit" class="btn-primary">
+          {% if produto %}Salvar Alterações{% else %}Adicionar Produto{% endif %}
+        </button>
+      </div>
+    </form>
+
+    <p class="back-link">
+      ← <a href="{% url 'loja' loja.id %}">Voltar à minha loja</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

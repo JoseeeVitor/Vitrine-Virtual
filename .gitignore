@@ -1,0 +1,15 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
+# Ambiente virtual
+venv/
+.env/
+
+# Arquivo de banco SQLite
+db.sqlite3
+
+# Arquivos do editor
+*.swp
+.vscode/
+.idea/

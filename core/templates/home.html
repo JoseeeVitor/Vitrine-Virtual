@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Descubra Negócios Locais{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1>Descubra Negócios Locais Incríveis dos Nossos MEIs</h1>
+      <p>Explore produtos e serviços únicos direto da sua comunidade</p>
+    </div>
+
+
+    <div class="hero-image">
+   <img src="{% static 'img/itape.png' %}"alt="Banner principal"class="hero-banner">
+    </div>
+  </div>
+
+
+  <div class="container hero-search">
+    <form method="get" action="">
+      <input type="text" name="q" value="{{ busca }}" placeholder="Qual loja está procurando?" value="{{ busca }}">
+
+
+      <select name="categoria">
+        <option value="" {% if not selecionadas %}selected{% endif %}>
+         Todas as categorias
+        </option>
+         {% for cat in categorias %}
+          <option
+            value="{{ cat.slug }}"
+            {% if cat.slug == selecionadas %}selected{% endif %}>
+            {{ cat.nome }}
+          </option>
+         {% endfor %}
+       </select>
+
+      <button type="submit">🔍</button>
+    </form>
+    
+    <ul class="category-filters">
+      {% for cat in categorias %}
+        <li>
+         
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="container destaque">
+  <h2>Vitrines em Destaque</h2>
+  <div class="grid-vitrines">
+    {% for loja in lojas %}
+      <a href="{% url 'loja' loja.id %}" class="card-vitine">
+        {% if loja.cover_image %}
+          <img src="{{ loja.cover_image.url }}" alt="Capa {{ loja.nome }}">
+        {% else %}
+          <div class="ratio-card"></div>
+        {% endif %}
+        <div class="card-body">
+          <h3>{{ loja.nome }}</h3>
+          <p class="categoria">{{ loja.categoria.nome }}</p>
+          <p class="desc">{{ loja.descricao|truncatechars:40 }}</p>
+          <button class="btn-sm">Ver Vitrine</button>
+        </div>
+      </a>
+    {% empty %}
+      <p>Não há vitrines que correspondam à sua busca.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

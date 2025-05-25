@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Cadastre-se{% endblock %}
+
+{% block content %}
+<div class="container form-page">
+  <h2>Crie sua conta</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="field">
+      {{ form.username.label_tag }}<br>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="field">
+      {{ form.password1.label_tag }}<br>
+      {{ form.password1 }}
+      {{ form.password1.errors }}
+    </div>
+    <div class="field">
+      {{ form.password2.label_tag }}<br>
+      {{ form.password2 }}
+      {{ form.password2.errors }}
+    </div>
+    <button class="btn-md" type="submit">Cadastrar</button>
+  </form>
+</div>
+{% endblock %}

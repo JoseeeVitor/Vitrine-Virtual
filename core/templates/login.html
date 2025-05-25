@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+<div class="container form-page">
+  <h1>Entrar</h1>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <div class="field">
+      {{ form.username.label_tag }}<br>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="field">
+      {{ form.password.label_tag }}<br>
+      {{ form.password }}
+      {{ form.password.errors }}
+    </div>
+    <button class="btn-md" type="submit">Fazer login</button>
+  </form>
+  <p class="small mt-2">
+    Ainda não tem conta? <a href="{% url 'signup' %}">Cadastre-se</a>
+  </p>
+</div>
+{% endblock %}

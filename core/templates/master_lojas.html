@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Todas as Lojas (Master){% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Visão Mestre de Lojas</h1>
+  <ul>
+    {% for loja in lojas %}
+      <li>
+        <a href="{% url 'loja' loja.id %}">{{ loja.nome }}</a>
+        – {{ loja.categoria }}
+      </li>
+    {% empty %}
+      <p>Sem lojas.</p>
+    {% endfor %}
+  </ul>
+  <p><a href="{% url 'home' %}">← Voltar à Home</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Editar Loja – {{ loja.nome }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Editar Loja: {{ loja.nome }}</h2>
+  <form method="post" enctype="multipart/form-data" action="{% url 'editar_loja' loja.id %}">
+    {% csrf_token %}
+
+    <!-- capa -->
+    <div class="mb-3">
+      <label class="form-label">Imagem de Capa</label><br>
+      {% if loja.cover_image %}
+        <img src="{{ loja.cover_image.url }}" style="max-width:200px;"><br>
+        <button name="remove_cover" value="1" class="btn btn-sm btn-danger mt-1">Excluir Capa</button>
+      {% endif %}
+      {{ form.cover_image }}
+    </div>
+
+    <!-- avatar -->
+    <div class="mb-3">
+      <label class="form-label">Avatar</label><br>
+      {% if loja.profile_image %}
+        <img src="{{ loja.profile_image.url }}" style="max-width:100px;"><br>
+        <button name="remove_avatar" value="1" class="btn btn-sm btn-danger mt-1">Excluir Avatar</button>
+      {% endif %}
+      {{ form.profile_image }}
+    </div>
+
+    <!-- restantes -->
+    <div class="mb-3">{{ form.nome.label_tag }}{{ form.nome }}</div>
+    <div class="mb-3">{{ form.descricao.label_tag }}{{ form.descricao }}</div>
+    <div class="mb-3">{{ form.categoria.label_tag }}{{ form.categoria }}</div>
+    <div class="mb-3">{{ form.endereco.label_tag }}{{ form.endereco }}</div>
+    <div class="mb-3">{{ form.telefone.label_tag }}{{ form.telefone }}</div>
+    <div class="mb-3">{{ form.horario_funcionamento.label_tag }}{{ form.horario_funcionamento }}</div>
+    
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+  </form>
+</div>
+{% endblock %}
