@@ -1,0 +1,72 @@
+{# core/templates/base.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %} — Vitrine Virtual</title>
+
+
+  <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="{% url 'home' %}" class="brand">
+        <img src="{% static 'img/logo.png' %}" alt="logo Vitrine Virtual" class="brand-logo">
+        <span class="brand-text">
+        Vitrine<br>
+        Virtual
+        <span>
+      </a>
+
+      
+
+      <nav class="nav-links">
+        <a href="{% url 'home' %}">Início</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+      </nav>
+
+      <div class="nav-action">
+        {% if user.is_authenticated %}
+  {% if user_loja %}
+    <a href="{% url 'loja' user_loja.id %}" class="btn btn-sm btn-edit">Minha Loja</a>
+  {% else %}
+    <a href="{% url 'criar_loja' %}" class="btn btn-sm btn-edit">Criar Minha Loja</a>
+  {% endif %}
+  <a href="{% url 'logout' %}" class="btn btn-sm btn-edit">Sair</a>
+  {% else %}
+  <a href="{% url 'login' %}" class="btn btn-outline-dark btn-md">Sou Empreendedor (Login)</a>
+  {% endif %}
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    © 2025 Vitrine Virtual |
+    <a href="#">Sobre</a> |
+    <a href="#">Termos</a> |
+    <a href="#">Suporte</a>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
