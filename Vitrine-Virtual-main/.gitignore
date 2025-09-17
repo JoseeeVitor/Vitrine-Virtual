@@ -13,3 +13,6 @@ db.sqlite3
 *.swp
 .vscode/
 .idea/
+
+# Arquivo de variáveis de ambiente e senhas
+.env

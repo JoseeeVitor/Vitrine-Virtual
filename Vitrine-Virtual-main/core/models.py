@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,9 +17,9 @@ class Loja(models.Model):
     descricao     = models.TextField("Breve descrição")
     endereco      = models.CharField("Endereço", max_length=200)
     categoria     = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
-    imagem        = models.ImageField(upload_to='lojas/logos/', null=True, blank=True)
-    cover_image   = models.ImageField(upload_to='lojas/covers/', null=True, blank=True)
-    profile_image = models.ImageField(upload_to='lojas/avatars/', null=True, blank=True)
+    imagem        = CloudinaryField('image', null=True, blank=True)
+    cover_image   = CloudinaryField('image', null=True, blank=True)
+    profile_image = CloudinaryField('image', null=True, blank=True)
     telefone = models.CharField(max_length=20, blank=True,help_text="Número de telefone para contato")
     horario_funcionamento = models.CharField(max_length=100,blank=True,help_text="Ex: Seg–Sex 08:00–18:00; Sáb 08:00–12:00")
     def __str__(self):

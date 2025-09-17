@@ -1,9 +1,14 @@
 altgraph==0.17.4
 asgiref==3.8.1
+certifi==2025.8.3
+charset-normalizer==3.4.3
+cloudinary==1.44.1
 dj-database-url==3.0.1
+dj3-cloudinary-storage==0.0.6
 Django==5.2.1
 et_xmlfile==2.0.0
 gunicorn==23.0.0
+idna==3.10
 openpyxl==3.1.5
 packaging==25.0
 pefile==2023.2.7
@@ -11,8 +16,12 @@ pillow==11.3.0
 psycopg2-binary==2.9.10
 pyinstaller==6.14.1
 pyinstaller-hooks-contrib==2025.5
+python-dotenv==1.1.1
 pywin32-ctypes==0.2.3
+requests==2.32.5
 setuptools==80.9.0
+six==1.17.0
 sqlparse==0.5.3
 tzdata==2025.2
+urllib3==2.5.0
 whitenoise==6.10.0
