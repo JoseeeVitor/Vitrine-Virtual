@@ -16,15 +16,13 @@ class LojaForm(forms.ModelForm):
         fields = [
             'nome',
             'telefone',
-            'descricao',
-            'imagem',        
+            'descricao',    
             'endereco',
             'categoria',
             'cover_image',   
             'profile_image',
-            'horario_funcionamento'
-            
-        ] 
+            'horario_funcionamento'] 
+
         widgets = {'descricao': forms.Textarea(attrs={'rows':3}),  }        
         
     def __init__(self, *args, **kwargs):
@@ -32,5 +30,4 @@ class LojaForm(forms.ModelForm):
 
         self.fields['cover_image'].required = False
         self.fields['profile_image'].required = False
-        self.fields['imagem'].required = False
         self.fields['categoria'].required = False
