@@ -4,9 +4,6 @@ from django.conf import settings           #importando as configurações do pro
 from django.conf.urls.static import static #importando para servir arquivos estáticos
 
 
-urlpatterns = [path('admin/', admin.site.urls),
-               path('', include('core.urls')),
-]
+urlpatterns = [path('admin/', admin.site.urls), path('', include('core.urls')),] #Se não for admin, inclui as urls do app core
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #serve arquivos de mídia durante o desenv
